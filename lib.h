@@ -18,11 +18,12 @@
 
 #include <sys/types.h>
 
-#pragma comment(lib, "Ws2_32.lib") // add to information for compiler this link with Ws2 lib
+// #pragma comment(lib, "Ws2_32.lib") // add to information for compiler this link with Ws2 lib
 /*max define 5 process*/
 #define MAX_PROCESS 5
 
 int create_new_process_(int number_of_process);
 int check_proxy_connection(const char *proxy_address, int port);
+int Open_browser(const char *url);
 
 #endif

@@ -18,7 +18,7 @@ int create_new_process_(int number_of_process)
         // Create new process to execute the command
         if (!CreateProcess(NULL, command, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
         {
-            printf("CreateProcess failed (%d).\n", GetLastError());
+            printf("CreateProcess failed (%lu).\n", GetLastError());
             return -1;
         }
 

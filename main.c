@@ -21,9 +21,6 @@ void thankyouBanner()
 	printf("*****************************************************\n");
 }
 
-
-
-
 int main(void)
 {
 	/* Declare variables */
@@ -131,7 +128,8 @@ int main(void)
 			banner();
 			printf("\n1.Choosing for back to the main menu ");
 			printf("\n2.Check proxy connection ");
-			printf("\n3.you are choosing:");
+			printf("\n3.Check open Brower");
+			printf("\n4.you are choosing:");
 			scanf("%d", &back);
 			if (back == 2)
 			{
@@ -148,7 +146,24 @@ int main(void)
 				if (check_proxy_connection(address, port) == 0)
 				{
 					printf("Connection successful!\n");
-					
+				}
+				else
+				{
+					printf("Connection failed!\n");
+				};
+			}
+
+			if (back == 3)
+			{
+				char url[100];
+				system("cls");
+				banner();
+				printf("\n1.Choosing for back to the main menu ");
+				printf("\n2.Enter url: ");
+				scanf("%s", url);
+				if (Open_browser(url) == 0)
+				{
+					printf("Connection successful!\n");
 				}
 				else
 				{
