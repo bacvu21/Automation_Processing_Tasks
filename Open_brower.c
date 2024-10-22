@@ -1,5 +1,11 @@
 #include "lib.h"
 
+// size_t writeCallBack()
+// {
+// 	CURL *curl;
+// 	return 0;
+// }
+
 int Open_browser(const char *url)
 {
 	if (url == NULL)
@@ -7,20 +13,25 @@ int Open_browser(const char *url)
 		return -1; // Return -1 if the URL is NULL
 	}
 
+	// Validate URL (simple check; more robust validation can be added)
+	if (strlen(url) == 0 || (strstr(url, "http://") == NULL && strstr(url, "https://") == NULL))
+	{
+		return -2; // Invalid URL format
+	}
+
 	// Determine the size needed for the command string
 	size_t command_size = strlen(url) + 20; // Extra space for the platform-specific command
 
 	// Dynamically allocate memory for the command string
 	char *command = (char *)malloc(command_size);
-
 	if (command == NULL)
 	{
-		return -1; // Memory allocation failed
+		return -3; // Memory allocation failed
 	}
 
 #ifdef _WIN32
 	// Windows: Use "start"
-	strcpy(command, "start ");
+	strcpy(command, "start \"\" ");
 #elif __APPLE__
 	// macOS: Use "open"
 	strcpy(command, "open ");
@@ -29,7 +40,7 @@ int Open_browser(const char *url)
 	strcpy(command, "xdg-open ");
 #else
 	free(command);
-	return -1; // Unsupported platform
+	return -4; // Unsupported platform
 #endif
 
 	// Concatenate the URL to the command string
@@ -41,5 +52,11 @@ int Open_browser(const char *url)
 	// Free the allocated memory
 	free(command);
 
-	return result; // Return the result of the system call
+	// Check the result of the system call
+	if (result == -1)
+	{
+		return -5; // Failed to execute command
+	}
+
+	return 0; // Return 0 for success
 }

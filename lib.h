@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "F:\Project\Cproject\Automation_Processing_Tasks\curl\include\curl\curl.h"
 #ifdef _WIN32
 #include <winsock2.h>
 #include <windows.h>
